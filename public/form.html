@@ -1,0 +1,118 @@
+<head>
+
+  <style>
+    .form-control {
+      padding: 10px;
+      margin: 10px;
+      width: 200px;
+    }
+
+    button {
+      height: 50px;
+      width: 100px;
+    }
+  </style>
+  <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+</head>
+
+<body>
+  <div style="text-align: center;">
+    <h1>Custom QRCode</h1>
+    <select id="bank_bin" class="form-control">
+      <option value='970425'>ABBANK</option>
+      <option value='970416'>ACB</option>
+      <option value='970405'>Agribank</option>
+      <option value='970409'>BacABank</option>
+      <option value='970438'>BaoVietBank</option>
+      <option value='970418'>BIDV</option>
+      <option value='546034'>CAKE</option>
+      <option value='970444'>CBBank</option>
+      <option value='422589'>CIMB</option>
+      <option value='970446'>COOPBANK</option>
+      <option value='796500'>DBSBank</option>
+      <option value='970406'>DongABank</option>
+      <option value='970431'>Eximbank</option>
+      <option value='970408'>GPBank</option>
+      <option value='970437'>HDBank</option>
+      <option value='970442'>HongLeong</option>
+      <option value='458761'>HSBC</option>
+      <option value='970456'>IBKHCM</option>
+      <option value='970455'>IBKHN</option>
+      <option value='970434'>IndovinaBank</option>
+      <option value='668888'>KBank</option>
+      <option value='970452'>KienLongBank</option>
+      <option value='970463'>KookminHCM</option>
+      <option value='970462'>KookminHN</option>
+      <option value='970449'>LienVietPostBank</option>
+      <option value='970422'>MBBank</option>
+      <option value='970426'>MSB</option>
+      <option value='970428'>NamABank</option>
+      <option value='970419'>NCB</option>
+      <option value='801011'>Nonghyup</option>
+      <option value='970448'>OCB</option>
+      <option value='970414'>Oceanbank</option>
+      <option value='970430'>PGBank</option>
+      <option value='970439'>PublicBank</option>
+      <option value='970412'>PVcomBank</option>
+      <option value='970403'>Sacombank</option>
+      <option value='970400'>SaigonBank</option>
+      <option value='970429'>SCB</option>
+      <option value='970440'>SeABank</option>
+      <option value='970443'>SHB</option>
+      <option value='970424'>ShinhanBank</option>
+      <option value='970410'>StandardChartered</option>
+      <option value='970407' selected="selected">Techcombank</option>
+      <option value='963388'>Timo</option>
+      <option value='970423'>TPBank</option>
+      <option value='546035'>Ubank</option>
+      <option value='970458'>UnitedOverseas</option>
+      <option value='970441'>VIB</option>
+      <option value='970427'>VietABank</option>
+      <option value='970433'>VietBank</option>
+      <option value='970454'>VietCapitalBank</option>
+      <option value='970436'>Vietcombank</option>
+      <option value='970415'>VietinBank</option>
+      <option value='971005'>ViettelMoney</option>
+      <option value='971011'>VNPTMoney</option>
+      <option value='970432'>VPBank</option>
+      <option value='970421'>VRB</option>
+      <option value='970457'>Woori</option>
+    </select>
+    <br>
+    <input value="1972222222" id="bank_number" type="text" class="form-control" placeholder="Enter bank number...">
+    <br>
+    <input value="50000" id="amount" type="text" class="form-control" placeholder="Enter amount...">
+    <br>
+    <input value="a cup of coffee" id="note" type="text" class="form-control" placeholder="Enter note...">
+    <br>
+    <button id="submit">Submit</button>
+    <br>
+    <img id="qrcode" src="" />
+    <br>
+    <p id="message"></p>
+  </div>
+  <script>
+    document.addEventListener("DOMContentLoaded", function (event) {
+      document.getElementById("submit").addEventListener("click", submitForm);
+      function submitForm(e) {
+
+        $.get("/qrcode", {
+          bank_bin: document.getElementById("bank_bin").value || "",
+          bank_number: document.getElementById("bank_number").value || "",
+          amount: document.getElementById("amount").value || "",
+          note: document.getElementById("note").value || ""
+        },
+          function (data, status) {
+            if (data.code != 1) {
+              document.getElementById("message").innerText = data.message
+                + "\n\n" + new Date();
+              return;
+            }
+            document.getElementById("qrcode").src = data.data.url;
+            document.getElementById("message").innerText = data.message
+              + "\n\n" + new Date();
+          });
+      }
+    })
+  </script>
+</body>

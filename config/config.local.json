@@ -1,0 +1,9 @@
+{
+  "env": "local",
+  "app_name": "vietqr",
+  "app_desc": "vietqr desc",
+  "node_port": 7510,
+  "timeout_in_second": 10,
+  "base_url": "http://localhost:7510",
+  "base_host": "localhost:7510"
+}

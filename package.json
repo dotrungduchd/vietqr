@@ -1,0 +1,30 @@
+{
+  "name": "vietqr",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha",
+    "local": "NODE_ENV=local node index.js",
+    "dev": "NODE_ENV=development node index.js",
+    "pro": "NODE_ENV=production node index.js"
+  },
+  "dependencies": {
+    "body-parser": "^1.20.2",
+    "dotenv": "^16.0.3",
+    "express": "^4.17.2",
+    "lodash": "^4.17.21",
+    "mocha": "^10.2.0",
+    "qrcode": "^1.5.3"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dotrungduchd/vietqr.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dotrungduchd/vietqr/issues"
+  },
+  "homepage": "https://github.com/dotrungduchd/vietqr#readme"
+}
